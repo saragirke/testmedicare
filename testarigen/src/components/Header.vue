@@ -6,6 +6,8 @@
         <ul>
             <li><RouterLink to="/">Start</Routerlink></li>   
             <li><RouterLink to="/inventory">Lager</Routerlink></li>   
+              <li><RouterLink to="/accounts">Användarkonton</Routerlink></li>  
+                <li><RouterLink to="/super">Super</Routerlink></li>  
            
         </ul>
     </nav>
