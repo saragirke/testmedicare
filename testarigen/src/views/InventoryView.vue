@@ -15,7 +15,7 @@
         <th>Hantera</th>
         <th>Hantera</th>
     </tr>
-    <Vitamin @deleteVitamin="deleteVitamin(vitamin.id)" @change="change(vitamin.id)" v-for="vitamin in vitamins" :vitamin="vitamin" :key="vitamin.id" />
+    <Vitamin @deleteVitamin="deleteVitamin(vitamin.id)" @updateVitamin="updateVitamin(vitamin.id)" v-for="vitamin in vitamins" :vitamin="vitamin" :key="vitamin.id" />
 
 
 </table>
@@ -72,50 +72,53 @@ export default {
 
         //Läs in böcker på nytt
         this.getVitamins();
-   }
-},
+   },
 
-async updateVitamin(id){
+async updateVitamin(id) {
+console.log("hej");
+
 
 if(this.productno != 0 & this.name != 0 & this.category != 0 & this.amount != 0 & this.price != 0) { 
 
-            // Hämtar innehåll i td-element 
-            let vitproductno= document.getElementById("productno" + id).innerHTML;
-            let vitname= document.getElementById("name"+ id).innerHTML;
-            let vitcategory= document.getElementById("category" + id).innerHTML;
-            let vitamount= document.getElementById("amount" + id).innerHTML;
-            let vitprice= document.getElementById("price" + id).innerHTML; 
+// Hämtar innehåll i td-element 
+let vitproductno= document.getElementById("productno" + id).innerHTML;
+let vitname= document.getElementById("name"+ id).innerHTML;
+let vitcategory= document.getElementById("category" + id).innerHTML;
+let vitamount= document.getElementById("amount" + id).innerHTML;
+let vitprice= document.getElementById("price" + id).innerHTML; 
 
 
-                    //Javascript objekt
-                    let vitBody = {
-                    productno: vitproductno,
-                    name: vitname,
-                    category: vitcategory,
-                    amount: vitamount,
-                    price: vitprice
-                }; 
+        //Javascript objekt
+        let vitBody = {
+        productno: vitproductno,
+        name: vitname,
+        category: vitcategory,
+        amount: vitamount,
+        price: vitprice
+    }; 
 
-        const resp = await fetch("http://localhost:8000/api/vitamins/" + id, {
+const resp = await fetch("http://localhost:8000/api/vitamins/" + id, {
 
-        method: "PUT",
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify(vitBody)
+method: "PUT",
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(vitBody)
 
-               
-        });
-        const data = await resp.json();
 
-        document.getElementById("error").innerHTML = "Ändrad!";
-        console.log(vitBody);           
-                
-            }else {
-                document.getElementById("error").innerHTML = "Alla fält måste vara ifyllda!";
-            } 
-},
+});
+const data = await resp.json();
+
+document.getElementById("error").innerHTML = "Ändrad!";
+console.log(vitBody);
+
+}else {
+    document.getElementById("error").innerHTML = "Alla fält måste vara ifyllda!";
+} 
+
+},        
+    }, 
     mounted() {
         this.getVitamins();
     }
