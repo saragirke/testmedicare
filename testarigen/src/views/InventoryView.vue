@@ -75,7 +75,6 @@ export default {
    },
 
 async updateVitamin(id) {
-console.log("hej");
 
 
 if(this.productno != 0 & this.name != 0 & this.category != 0 & this.amount != 0 & this.price != 0) { 
